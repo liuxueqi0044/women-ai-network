@@ -1,0 +1,38 @@
+{
+  "name": "@wai/db",
+  "version": "0.1.0",
+  "private": true,
+  "description": "IAM schema, explicit SQL migrations, typed repositories and PII crypto primitives (IAM-01)",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./migrations/*": "./migrations/*.sql"
+  },
+  "files": [
+    "dist",
+    "migrations"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "db:migrate": "tsx src/cli/migrate.ts up",
+    "db:rollback": "tsx src/cli/migrate.ts down"
+  },
+  "dependencies": {
+    "@wai/contracts": "workspace:*",
+    "drizzle-orm": "0.45.2",
+    "pg": "8.16.3"
+  },
+  "devDependencies": {
+    "@types/pg": "8.15.4",
+    "drizzle-kit": "0.31.10",
+    "tsx": "4.19.4",
+    "typescript": "5.8.3",
+    "vitest": "3.2.6"
+  }
+}

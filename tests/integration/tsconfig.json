@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "types": ["node"]
+  },
+  "include": ["**/*.ts"],
+  // The vite config uses import.meta, which is invalid under the CommonJS
+  // module setting this project typechecks with (same convention as
+  // apps/api, whose vitest.config.ts sits outside `include: ["src"]`).
+  "exclude": ["vitest.config.ts"]
+}

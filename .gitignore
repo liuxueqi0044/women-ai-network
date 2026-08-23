@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Environment files — never commit real secrets
+.env
+.env.*
+!.env.example
+deploy/staging.env
+deploy/staging.release.json
+backups/
+
+# Test artifacts
+coverage/
+playwright-report/
+test-results/
+tests/**/blob-report/
+blob-report/
+
+# Local Docker volumes
+volumes/
+
+# Editor / OS
+.vscode/
+.idea/
+*.swp
+Thumbs.db
+Desktop.ini

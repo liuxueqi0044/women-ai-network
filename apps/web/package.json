@@ -1,0 +1,31 @@
+{
+  "name": "@wai/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Women AI Network Web — Next.js App Router foundation status (FND-01)",
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@wai/config": "workspace:*",
+    "@wai/contracts": "workspace:*",
+    "@wai/observability": "workspace:*",
+    "next": "15.5.23",
+    "zod": "3.24.4",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1",
+    "@wai/db": "workspace:*",
+    "@types/node": "22.15.21",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "@wai/testkit": "workspace:*",
+    "typescript": "5.8.3",
+    "vitest": "3.2.6"
+  }
+}

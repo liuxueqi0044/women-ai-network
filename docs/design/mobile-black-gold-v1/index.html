@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Women AI Network · Mobile Black Gold v1</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <svg class="svg-sprite" aria-hidden="true">
+      <symbol id="i-chat" viewBox="0 0 24 24">
+        <path
+          d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4.4A2.5 2.5 0 0 1 4 13.5z"
+        />
+      </symbol>
+      <symbol id="i-contacts" viewBox="0 0 24 24">
+        <circle cx="9" cy="8" r="3" />
+        <path
+          d="M3.5 19c.4-3.2 2.2-5 5.5-5s5.1 1.8 5.5 5M16 7.5a2.5 2.5 0 0 1 0 5M16.5 14c2.5.4 3.8 2 4 4.5"
+        />
+      </symbol>
+      <symbol id="i-world" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="9" />
+        <path
+          d="M3.5 12h17M12 3c2.5 2.7 3.6 5.7 3.6 9S14.5 18.3 12 21M12 3C9.5 5.7 8.4 8.7 8.4 12S9.5 18.3 12 21"
+        />
+      </symbol>
+      <symbol id="i-profile" viewBox="0 0 24 24">
+        <circle cx="12" cy="8" r="3.5" />
+        <path d="M4.5 20c.5-4.1 3-6.3 7.5-6.3s7 2.2 7.5 6.3" />
+      </symbol>
+      <symbol id="i-search" viewBox="0 0 24 24">
+        <circle cx="10.5" cy="10.5" r="6.5" />
+        <path d="m15.3 15.3 4.2 4.2" />
+      </symbol>
+      <symbol id="i-compose" viewBox="0 0 24 24">
+        <path d="M5 19h4l10-10a2.8 2.8 0 0 0-4-4L5 15zM13.8 6.2l4 4M4 21h16" />
+      </symbol>
+      <symbol id="i-add-person" viewBox="0 0 24 24">
+        <circle cx="9" cy="8" r="3" />
+        <path d="M3.5 19c.4-3.2 2.2-5 5.5-5s5.1 1.8 5.5 5M18 6v7M14.5 9.5h7" />
+      </symbol>
+      <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7" /></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24">
+        <rect x="3" y="5" width="18" height="14" rx="1.5" />
+        <path d="m4 7 8 6 8-6" />
+      </symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24">
+        <path d="M12 3 20 6v5c0 5.3-3.2 8.5-8 10-4.8-1.5-8-4.7-8-10V6z" />
+        <path d="m9 12 2 2 4-4" />
+      </symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24">
+        <path d="M6 17h12l-1.5-2v-4.5a4.5 4.5 0 0 0-9 0V15zM10 20h4" />
+      </symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24">
+        <rect x="4" y="10" width="16" height="11" rx="2" />
+        <path d="M8 10V7a4 4 0 0 1 8 0v3" />
+      </symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24">
+        <path d="M20 8.5C20 14 12 19 12 19S4 14 4 8.5A4.5 4.5 0 0 1 12 5.7 4.5 4.5 0 0 1 20 8.5z" />
+      </symbol>
+      <symbol id="i-bookmark" viewBox="0 0 24 24">
+        <path d="M6 4h12v17l-6-4-6 4z" />
+      </symbol>
+    </svg>
+
+    <main class="design-board" aria-label="Women AI Network mobile black gold design">
+      <article class="phone" id="screen-chat" aria-label="聊天">
+        <div class="status-bar"><span>9:41</span><span class="status-icons">▮▮▮ ◒ ▰</span></div>
+        <header class="screen-header">
+          <h1>聊天</h1>
+          <div class="header-actions">
+            <button aria-label="搜索">
+              <svg><use href="#i-search" /></svg>
+            </button>
+            <button aria-label="新建消息">
+              <svg><use href="#i-compose" /></svg>
+            </button>
+          </div>
+        </header>
+
+        <section class="conversation-list" aria-label="会话列表">
+          <article class="conversation-row">
+            <div class="avatar crop avatar-aisha"></div>
+            <div class="conversation-copy">
+              <h2>Aisha Rahman</h2>
+              <p>谢谢你的分享，我很喜欢你对<br />旅行的想法。</p>
+            </div>
+            <div class="conversation-meta"><time>10:24</time><span class="unread">2</span></div>
+          </article>
+          <article class="conversation-row">
+            <div class="avatar crop avatar-circle"></div>
+            <div class="conversation-copy">
+              <h2>晨光书友圈</h2>
+              <p>Mina：这本书的第二章让我<br />很有共鸣。</p>
+            </div>
+            <div class="conversation-meta"><time>09:41</time><span class="unread">1</span></div>
+          </article>
+          <article class="conversation-row">
+            <div class="avatar letter-avatar">〆</div>
+            <div class="conversation-copy">
+              <h2>私人信 · Leila</h2>
+              <p>草稿：关于你询问的书和<br />写作习惯…</p>
+            </div>
+            <div class="conversation-meta"><time>昨天</time></div>
+          </article>
+          <article class="conversation-row compact">
+            <div class="avatar crop avatar-linxiaoman"></div>
+            <div class="conversation-copy">
+              <h2>林小满</h2>
+              <p>期待下周一起参加读书会。</p>
+            </div>
+            <div class="conversation-meta"><time>昨天</time></div>
+          </article>
+          <article class="conversation-row compact">
+            <div class="avatar crop avatar-priya"></div>
+            <div class="conversation-copy">
+              <h2>Priya</h2>
+              <p>下次见面聊聊曼谷的计划吧！</p>
+            </div>
+            <div class="conversation-meta"><time>周一</time></div>
+          </article>
+          <article class="conversation-row compact">
+            <div class="avatar crop avatar-life"></div>
+            <div class="conversation-copy">
+              <h2>生活灵感圈</h2>
+              <p>Yuki：分享了 3 张照片</p>
+            </div>
+            <div class="conversation-meta"><time>周一</time><span class="unread">3</span></div>
+          </article>
+          <article class="conversation-row compact">
+            <div class="avatar crop avatar-maria"></div>
+            <div class="conversation-copy">
+              <h2>Maria</h2>
+              <p>谢谢你的建议，非常有帮助。</p>
+            </div>
+            <div class="conversation-meta"><time>周日</time></div>
+          </article>
+          <article class="conversation-row compact">
+            <div class="avatar crop avatar-yuki"></div>
+            <div class="conversation-copy">
+              <h2>Yuki</h2>
+              <p>已发送一封私人信</p>
+            </div>
+            <div class="conversation-meta"><time>周日</time></div>
+          </article>
+        </section>
+        <nav class="bottom-nav" aria-label="主要导航">
+          <a class="active" href="#screen-chat"
+            ><svg><use href="#i-chat" /></svg><span>聊天</span></a
+          >
+          <a href="#screen-connect"
+            ><svg><use href="#i-contacts" /></svg><span>联系</span></a
+          >
+          <a href="#screen-world"
+            ><svg><use href="#i-world" /></svg><span>世界</span></a
+          >
+          <a href="#screen-me"
+            ><svg><use href="#i-profile" /></svg><span>我的</span></a
+          >
+        </nav>
+        <div class="home-indicator"></div>
+      </article>
+
+      <article class="phone" id="screen-connect" aria-label="联系">
+        <div class="status-bar"><span>9:41</span><span class="status-icons">▮▮▮ ◒ ▰</span></div>
+        <header class="screen-header">
+          <h1>联系</h1>
+          <button class="single-action" aria-label="添加联系人">
+            <svg><use href="#i-add-person" /></svg>
+          </button>
+        </header>
+        <div class="segmented-tabs">
+          <button class="active">联系人</button><button>发现连接</button>
+        </div>
+        <section class="quick-actions">
+          <button>
+            <svg><use href="#i-add-person" /></svg><span>新的朋友</span
+            ><svg class="chevron"><use href="#i-chevron" /></svg>
+          </button>
+          <button>
+            <svg><use href="#i-contacts" /></svg><span>添加联系人</span
+            ><svg class="chevron"><use href="#i-chevron" /></svg>
+          </button>
+        </section>
+        <section class="contacts-section">
+          <header>
+            <h2>当前联系人</h2>
+            <button>查看全部</button>
+          </header>
+          <div class="avatar-strip">
+            <figure>
+              <div class="avatar crop avatar-aisha"><i></i></div>
+              <figcaption>Priya</figcaption>
+            </figure>
+            <figure>
+              <div class="avatar crop avatar-yuki"><i></i></div>
+              <figcaption>Yuki</figcaption>
+            </figure>
+            <figure>
+              <div class="avatar crop avatar-maria"><i></i></div>
+              <figcaption>Maria</figcaption>
+            </figure>
+            <figure>
+              <div class="avatar crop avatar-linxiaoman"><i></i></div>
+              <figcaption>Linh</figcaption>
+            </figure>
+          </div>
+        </section>
+        <section class="recommend-section">
+          <h2>可能认识的人</h2>
+          <article class="recommend-card">
+            <div class="recommend-top">
+              <div class="recommend-portrait crop"></div>
+              <div>
+                <h3>Sofia Petrova</h3>
+                <p>BULGARIA · SOFIA</p>
+                <span>English, Русский</span>
+              </div>
+            </div>
+            <p class="recommend-reason">我们因共同兴趣和相近时区而为你推荐。</p>
+            <div class="recommend-actions">
+              <button>忽略</button><button class="primary">打招呼</button>
+            </div>
+          </article>
+        </section>
+        <section class="circle-section">
+          <h2>我的圈子</h2>
+          <button class="circle-row">
+            <span class="circle-mark">❧</span
+            ><span><strong>写作与生活</strong><small>24 位成员</small></span
+            ><svg><use href="#i-chevron" /></svg>
+          </button>
+        </section>
+        <nav class="bottom-nav" aria-label="主要导航">
+          <a href="#screen-chat"
+            ><svg><use href="#i-chat" /></svg><span>聊天</span></a
+          >
+          <a class="active" href="#screen-connect"
+            ><svg><use href="#i-contacts" /></svg><span>联系</span></a
+          >
+          <a href="#screen-world"
+            ><svg><use href="#i-world" /></svg><span>世界</span></a
+          >
+          <a href="#screen-me"
+            ><svg><use href="#i-profile" /></svg><span>我的</span></a
+          >
+        </nav>
+        <div class="home-indicator"></div>
+      </article>
+
+      <article class="phone" id="screen-world" aria-label="世界">
+        <div class="status-bar"><span>9:41</span><span class="status-icons">▮▮▮ ◒ ▰</span></div>
+        <header class="screen-header">
+          <h1>世界</h1>
+          <div class="header-actions">
+            <button aria-label="搜索">
+              <svg><use href="#i-search" /></svg>
+            </button>
+            <button aria-label="发布">
+              <svg><use href="#i-compose" /></svg>
+            </button>
+          </div>
+        </header>
+        <div class="world-tabs">
+          <button class="active">全部</button><button>生活</button><button>公开信</button>
+        </div>
+        <section class="feed" aria-label="世界内容">
+          <article class="feed-card feature-post">
+            <header class="feed-author">
+              <div class="mini-avatar crop avatar-elena"></div>
+              <div><strong>Elena Rossi</strong><small>Rome · Italy</small></div>
+              <time>2 小时前</time><button>•••</button>
+            </header>
+            <div class="feed-hero crop"></div>
+            <div class="feed-copy">
+              <h2>A Window, and the Sea</h2>
+              <p>
+                This morning, the sea was unusually calm,<br />as if it wanted to listen. I sat by
+                the window<br />with my notebook, letting the light fill the<br />page before I
+                wrote a word.
+              </p>
+            </div>
+            <footer class="feed-stats">
+              <span>♡ 128</span><span>◯ 23</span><span>♧ 收藏</span>
+            </footer>
+          </article>
+          <article class="feed-card life-post">
+            <header class="feed-author">
+              <div class="mini-avatar crop avatar-naledi"></div>
+              <div><strong>Naledi Mokoena</strong><small>Cape Town · South Africa</small></div>
+              <time>昨天</time><button>•••</button>
+            </header>
+            <div class="feed-copy">
+              <p>A market morning in the heart of the city.<br />People, colors, stories.</p>
+            </div>
+            <div class="photo-grid">
+              <div class="crop market-one"></div>
+              <div class="crop market-two"></div>
+              <div class="crop market-three"></div>
+            </div>
+            <footer class="feed-stats">
+              <span>♡ 96</span><span>◯ 12</span><span>♧ 收藏</span>
+            </footer>
+          </article>
+        </section>
+        <nav class="bottom-nav" aria-label="主要导航">
+          <a href="#screen-chat"
+            ><svg><use href="#i-chat" /></svg><span>聊天</span></a
+          >
+          <a href="#screen-connect"
+            ><svg><use href="#i-contacts" /></svg><span>联系</span></a
+          >
+          <a class="active" href="#screen-world"
+            ><svg><use href="#i-world" /></svg><span>世界</span></a
+          >
+          <a href="#screen-me"
+            ><svg><use href="#i-profile" /></svg><span>我的</span></a
+          >
+        </nav>
+        <div class="home-indicator"></div>
+      </article>
+
+      <article class="phone" id="screen-me" aria-label="我的">
+        <div class="status-bar"><span>9:41</span><span class="status-icons">▮▮▮ ◒ ▰</span></div>
+        <header class="screen-header profile-title">
+          <h1>我的</h1>
+          <div class="postal-mark"><b>W</b><i></i></div>
+        </header>
+        <section class="profile-hero">
+          <div class="profile-photo crop"></div>
+          <div class="profile-copy">
+            <h2>林小满</h2>
+            <p>China · 中文 · English</p>
+            <span>✓&nbsp;&nbsp;已验证会员</span>
+          </div>
+        </section>
+        <section class="completion-card">
+          <div>
+            <span>完善个人资料</span><strong>60% 完成</strong><svg><use href="#i-chevron" /></svg>
+          </div>
+          <div class="progress"><i></i></div>
+        </section>
+        <section class="settings-list">
+          <a
+            ><svg><use href="#i-profile" /></svg><span>个人资料</span
+            ><svg><use href="#i-chevron" /></svg
+          ></a>
+          <a
+            ><svg><use href="#i-mail" /></svg><span>我的公开信</span
+            ><svg><use href="#i-chevron" /></svg
+          ></a>
+          <a
+            ><svg><use href="#i-compose" /></svg><span>私人信草稿</span
+            ><svg><use href="#i-chevron" /></svg
+          ></a>
+          <a
+            ><svg><use href="#i-shield" /></svg><span>身份与安全</span
+            ><svg><use href="#i-chevron" /></svg
+          ></a>
+          <a
+            ><svg><use href="#i-bell" /></svg><span>语言与通知</span
+            ><svg><use href="#i-chevron" /></svg
+          ></a>
+          <a
+            ><svg><use href="#i-lock" /></svg><span>隐私设置</span
+            ><svg><use href="#i-chevron" /></svg
+          ></a>
+        </section>
+        <nav class="bottom-nav" aria-label="主要导航">
+          <a href="#screen-chat"
+            ><svg><use href="#i-chat" /></svg><span>聊天</span></a
+          >
+          <a href="#screen-connect"
+            ><svg><use href="#i-contacts" /></svg><span>联系</span></a
+          >
+          <a href="#screen-world"
+            ><svg><use href="#i-world" /></svg><span>世界</span></a
+          >
+          <a class="active" href="#screen-me"
+            ><svg><use href="#i-profile" /></svg><span>我的</span></a
+          >
+        </nav>
+        <div class="home-indicator"></div>
+      </article>
+    </main>
+  </body>
+</html>

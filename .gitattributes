@@ -1,0 +1,27 @@
+# Line-ending policy: the repository stores every text file as LF, and
+# checkout keeps LF on ALL platforms. The explicit `eol=lf` takes precedence
+# over any local `core.autocrlf=true`, so a fresh Windows clone passes
+# `pnpm format:check` (prettier endOfLine: lf) without per-developer git
+# configuration.
+
+* text=auto eol=lf
+
+# Binary files: never line-ending converted, never diffed as text.
+# (None are currently tracked; declared so future assets cannot break the
+# text policy.)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tgz binary
+*.tar binary

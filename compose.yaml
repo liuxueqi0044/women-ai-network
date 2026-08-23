@@ -1,0 +1,152 @@
+# Local development dependencies for FND-01.
+# Images are pinned to exact versions. Credentials are non-default development
+# values only; production rejects them (see packages/config).
+#
+# Workspace isolation: this file deliberately defines NO top-level `name:`,
+# NO `container_name:` and NO global volume `name:` — every resource is
+# scoped by the Compose PROJECT name, so several workspaces (e.g. the Claude
+# and OpenCode copies, or a CI runner) can run in parallel on one machine:
+#   docker compose -p wai-dev-a up -d --wait  # containers  wai-dev-a-postgres-1, …
+#   docker compose -p wai-dev-b up -d --wait  # volumes     wai-dev-a_pgdata, …
+# with distinct POSTGRES_HOST_PORT / VALKEY_HOST_PORT per project (see
+# docs/runbooks/local-development.md).
+
+services:
+  postgres:
+    image: postgres:17.5-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-wai_dev}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-wai_dev_pg_8f3k}
+      POSTGRES_DB: ${POSTGRES_DB:-wai_dev}
+    ports:
+      - '${POSTGRES_HOST_PORT:-5433}:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  # ELG-01 policy engine. Pinned — never `latest`. Policies are bind-mounted
+  # read-only from the workspace so local edits take effect without rebuilds.
+  opa:
+    image: openpolicyagent/opa:1.17.0-static
+    ports:
+      - '127.0.0.1:${OPA_HOST_PORT:-8181}:8181'
+    volumes:
+      - ./packages/authz/policies:/policy:ro
+    command: ['run', '--server', '--addr', ':8181', '/policy']
+    healthcheck:
+      # The static image is scratch (no shell) — plain CMD, not CMD-SHELL.
+      # Fails when the eligibility packages did not resolve.
+      test:
+        [
+          'CMD',
+          'opa',
+          'eval',
+          '--data',
+          '/policy',
+          '--format',
+          'raw',
+          'count(data.eligibility) > 0',
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  valkey:
+    image: valkey/valkey:8.1.1-alpine
+    environment:
+      # The healthcheck below runs inside the container and expands
+      # ${VALKEY_PASSWORD} there — the var must exist in the container env,
+      # not only in the --requirepass argument.
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD:-wai_dev_valkey_9q2x}
+    command:
+      [
+        'valkey-server',
+        '--requirepass',
+        '${VALKEY_PASSWORD:-wai_dev_valkey_9q2x}',
+        '--appendonly',
+        'yes',
+      ]
+    ports:
+      - '${VALKEY_HOST_PORT:-6380}:6379'
+    volumes:
+      - valkeydata:/data
+    healthcheck:
+      test: ['CMD-SHELL', 'valkey-cli -a $${VALKEY_PASSWORD} ping | grep -q PONG']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  # Optional secure-media development profile. Production should point the
+  # same S3-compatible adapter at a private managed bucket and run ClamAV on a
+  # private service network. These services are intentionally excluded from
+  # the default foundation stack because the ClamAV image/signature database is
+  # comparatively large.
+  minio:
+    profiles: ['media']
+    image: minio/minio:RELEASE.2025-04-22T22-12-26Z
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-wai_media_dev}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-wai_media_dev_secret_9f4k2m}
+      # Community MinIO exposes CORS as an API-wide setting. Keep this list
+      # explicit; never use `*` in a production object-store deployment.
+      MINIO_API_CORS_ALLOW_ORIGIN: ${MEDIA_BROWSER_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+    command: ['server', '/data', '--console-address', ':9001']
+    ports:
+      - '127.0.0.1:${MINIO_API_HOST_PORT:-9000}:9000'
+      - '127.0.0.1:${MINIO_CONSOLE_HOST_PORT:-9001}:9001'
+    volumes:
+      - miniodata:/data
+    healthcheck:
+      test: ['CMD', 'curl', '-f', 'http://127.0.0.1:9000/minio/health/live']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 10s
+
+  minio-create-buckets:
+    profiles: ['media']
+    image: minio/mc:RELEASE.2025-04-16T18-13-26Z
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: ['/bin/sh', '-c']
+    command:
+      - >-
+        mc alias set local http://minio:9000
+        "$${MINIO_ROOT_USER}" "$${MINIO_ROOT_PASSWORD}" &&
+        mc mb --ignore-existing local/$${MEDIA_S3_QUARANTINE_BUCKET} &&
+        mc mb --ignore-existing local/$${MEDIA_S3_CLEAN_BUCKET} &&
+        mc anonymous set none local/$${MEDIA_S3_QUARANTINE_BUCKET} &&
+        mc anonymous set none local/$${MEDIA_S3_CLEAN_BUCKET}
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-wai_media_dev}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-wai_media_dev_secret_9f4k2m}
+      MEDIA_S3_QUARANTINE_BUCKET: ${MEDIA_S3_QUARANTINE_BUCKET:-wai-private-quarantine}
+      MEDIA_S3_CLEAN_BUCKET: ${MEDIA_S3_CLEAN_BUCKET:-wai-private-clean}
+
+  clamav:
+    profiles: ['media']
+    image: clamav/clamav:1.4.3
+    ports:
+      - '127.0.0.1:${CLAMAV_HOST_PORT:-3310}:3310'
+    volumes:
+      - clamavdata:/var/lib/clamav
+    healthcheck:
+      test: ['CMD-SHELL', 'clamdscan --ping 1']
+      interval: 10s
+      timeout: 10s
+      retries: 60
+      start_period: 60s
+
+volumes:
+  pgdata:
+  valkeydata:
+  miniodata:
+  clamavdata:

@@ -1,0 +1,23 @@
+title = "Women AI Network portfolio secret scanning"
+
+[extend]
+useDefault = true
+
+# These exact files contain documented local-development placeholders or
+# synthetic credentials used to verify configuration and redaction behavior.
+# They are never accepted as production credentials.
+[[allowlists]]
+description = "Known non-secret fixtures and local placeholders"
+paths = [
+  '''(^|/)\.env\.example$''',
+  '''(^|/)apps/api/src/app\.spec\.ts$''',
+  '''(^|/)apps/api/src/media/media\.module\.spec\.ts$''',
+  '''(^|/)apps/worker/src/media/worker-media-startup\.spec\.ts$''',
+  '''(^|/)packages/config/src/config\.test\.ts$''',
+  '''(^|/)packages/config/src/index\.ts$''',
+  '''(^|/)packages/observability/src/redaction\.test\.ts$''',
+  '''(^|/)tests/integration/letters/letters\.test\.ts$''',
+  '''(^|/)tests/integration/messaging/messaging\.integration\.test\.ts$''',
+  '''(^|/)tests/integration/onboarding/migration\.test\.ts$''',
+  '''(^|/)tests/integration/translation/migration\.integration\.test\.ts$'''
+]

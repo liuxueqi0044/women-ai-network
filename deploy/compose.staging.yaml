@@ -1,0 +1,169 @@
+name: ${COMPOSE_PROJECT_NAME:-wai-staging}
+
+x-runtime: &runtime
+  env_file:
+    - path: ${STAGING_RUNTIME_ENV_FILE:-./staging.env}
+      required: true
+  restart: unless-stopped
+  init: true
+  networks: [app]
+  environment: &runtime-environment
+    NODE_ENV: production
+    DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+    VALKEY_URL: redis://:${VALKEY_PASSWORD}@valkey:6379/0
+    ELG_OPA_URL: http://opa:8181
+    API_HOST: 0.0.0.0
+    API_PORT: 3100
+
+services:
+  postgres:
+    image: postgres:17.5-alpine
+    restart: unless-stopped
+    networks: [app]
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  valkey:
+    image: valkey/valkey:8.1.1-alpine
+    restart: unless-stopped
+    init: true
+    networks: [app]
+    environment:
+      VALKEY_PASSWORD: ${VALKEY_PASSWORD}
+    command: ['valkey-server', '--requirepass', '${VALKEY_PASSWORD}', '--appendonly', 'yes']
+    volumes:
+      - valkeydata:/data
+    healthcheck:
+      test: ['CMD-SHELL', 'valkey-cli -a "$${VALKEY_PASSWORD}" ping | grep -q PONG']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  opa:
+    image: openpolicyagent/opa:1.17.0-static
+    restart: unless-stopped
+    networks: [app]
+    volumes:
+      - ../packages/authz/policies:/policy:ro
+    command: ['run', '--server', '--addr', ':8181', '/policy']
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'opa',
+          'eval',
+          '--data',
+          '/policy',
+          '--format',
+          'raw',
+          'count(data.eligibility) > 0',
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  migrate:
+    build:
+      context: ..
+      dockerfile: deploy/docker/Dockerfile
+      target: migrate
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL}
+    image: ${WAI_IMAGE_REPOSITORY:-wai-local}:${WAI_IMAGE_TAG:-staging}-migrate
+    init: true
+    networks: [app]
+    env_file:
+      - path: ${STAGING_RUNTIME_ENV_FILE:-./staging.env}
+        required: true
+    environment:
+      <<: *runtime-environment
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: 'no'
+
+  api:
+    <<: *runtime
+    build:
+      context: ..
+      dockerfile: deploy/docker/Dockerfile
+      target: api
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL}
+    image: ${WAI_IMAGE_REPOSITORY:-wai-local}:${WAI_IMAGE_TAG:-staging}-api
+    ports:
+      - 127.0.0.1:${STAGING_API_PORT:-13100}:3100
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      valkey:
+        condition: service_healthy
+      opa:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:3100/v1/health/ready').then(async r=>{if(!r.ok)throw 0;const b=await r.json();if(b.status!=='ready')throw 0}).catch(()=>process.exit(1))",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 20s
+
+  worker:
+    <<: *runtime
+    build:
+      context: ..
+      dockerfile: deploy/docker/Dockerfile
+      target: worker
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL}
+    image: ${WAI_IMAGE_REPOSITORY:-wai-local}:${WAI_IMAGE_TAG:-staging}-worker
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      valkey:
+        condition: service_healthy
+      opa:
+        condition: service_healthy
+
+  web:
+    <<: *runtime
+    build:
+      context: ..
+      dockerfile: deploy/docker/Dockerfile
+      target: web
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL}
+    image: ${WAI_IMAGE_REPOSITORY:-wai-local}:${WAI_IMAGE_TAG:-staging}-web
+    environment:
+      <<: *runtime-environment
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL}
+    ports:
+      - 127.0.0.1:${STAGING_WEB_PORT:-13000}:3000
+    depends_on:
+      api:
+        condition: service_healthy
+
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  pgdata:
+  valkeydata:

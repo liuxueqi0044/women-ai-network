@@ -1,0 +1,29 @@
+packages:
+  - apps/*
+  - packages/*
+
+# Security pinning: next pins postcss/sharp to versions with published
+# advisories (arbitrary file read via CSS sourceMappingURL; libvips CVEs).
+# The patched ranges stay within the same major, so the override is safe.
+overrides:
+  postcss: ^8.5.23
+  sharp: 0.35.3
+
+# Dependencies whose lifecycle scripts are trusted and required for correct
+# behavior (native bindings for bullmq/msgpackr, sharp libvips fallback,
+# esbuild validation, ssh2 binding, NestJS core init, protobufjs types).
+# Everything else is blocked by default (supply-chain hardening).
+allowBuilds:
+  '@nestjs/core': true
+  cpu-features: true
+  esbuild: true
+  msgpackr-extract: true
+  protobufjs: true
+  sharp: true
+  ssh2: true
+
+minimumReleaseAgeExclude:
+  - '@nestjs/common@11.2.1'
+  - '@nestjs/core@11.2.1'
+  - '@nestjs/platform-fastify@11.2.1'
+  - '@nestjs/testing@11.2.1'

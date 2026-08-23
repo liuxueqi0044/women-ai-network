@@ -1,0 +1,180 @@
+.onboarding-shell {
+  max-width: 44rem;
+  margin: auto;
+  padding: 2rem 1.25rem 5rem;
+}
+.onboarding-shell header {
+  padding: 3rem 0 2rem;
+}
+.onboarding-shell h1 {
+  font:
+    400 clamp(2.8rem, 10vw, 5rem) / 0.95 Georgia,
+    serif;
+  letter-spacing: -0.05em;
+  margin: 0.5rem 0 1rem;
+}
+.onboarding-shell h2 {
+  font:
+    400 2rem Georgia,
+    serif;
+}
+.onboarding-shell section {
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+}
+.progress {
+  height: 5px;
+  background: var(--paper-deep);
+  margin-bottom: 2rem;
+}
+.progress span {
+  display: block;
+  height: 100%;
+  background: var(--teal);
+  transition: width 0.2s;
+}
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin: 1.5rem 0;
+}
+.choice {
+  border: 1px solid var(--line);
+  padding: 1rem;
+  border-radius: 0.6rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+}
+.choice.selected {
+  border-color: var(--teal);
+  background: #e4efeb;
+}
+.mode-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+.mode-tabs button {
+  margin-top: 0;
+}
+.mode-tabs button[aria-selected='true'] {
+  background: var(--teal);
+  color: white;
+}
+.explicit {
+  display: block;
+  border-left: 4px solid var(--terracotta);
+  padding: 0.8rem;
+  margin: 1rem 0;
+  line-height: 1.5;
+}
+.onboarding-shell textarea,
+.onboarding-shell select {
+  width: 100%;
+  border: 1px solid var(--line);
+  padding: 0.8rem;
+  background: #fffaf3;
+  margin: 0.5rem 0 1.25rem;
+}
+.field-label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 1rem;
+}
+.status {
+  min-height: 1.5rem;
+  color: var(--teal);
+  margin-bottom: 0.75rem;
+}
+.error {
+  border-left: 4px solid var(--terracotta);
+  padding: 0.75rem 1rem;
+  background: #fff0eb;
+}
+.proposal {
+  border: 1px solid var(--terracotta);
+  padding: 1rem;
+  margin: 1.25rem 0;
+  background: #fffaf3;
+}
+.proposal input {
+  width: 100%;
+  border: 1px solid var(--line);
+  padding: 0.8rem;
+  background: white;
+  margin-top: 0.5rem;
+}
+.danger {
+  background: var(--terracotta) !important;
+  border-color: var(--terracotta) !important;
+}
+.onboarding-shell button {
+  border: 1px solid var(--teal);
+  background: var(--teal);
+  color: white;
+  border-radius: 2rem;
+  padding: 0.7rem 1.2rem;
+  margin-top: 1rem;
+}
+.onboarding-shell button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.actions .secondary {
+  background: transparent;
+  color: var(--teal);
+}
+.draft-label {
+  color: var(--terracotta);
+  font-weight: 700;
+}
+.onboarding-shell dl {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 0.8rem;
+  border-block: 1px solid var(--line);
+  padding: 1.2rem 0;
+}
+.onboarding-shell dt {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+.onboarding-shell dd {
+  margin: 0;
+}
+.privacy-note {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--muted);
+}
+@media (max-width: 42rem) {
+  .onboarding-shell {
+    padding: 1rem 1rem 3rem;
+  }
+  .onboarding-shell header {
+    padding: 2rem 0 1.25rem;
+  }
+  .mode-grid {
+    grid-template-columns: 1fr;
+  }
+  .onboarding-shell dl {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+  .onboarding-shell dt:not(:first-child) {
+    margin-top: 0.75rem;
+  }
+  .actions > button {
+    width: 100%;
+    margin-top: 0.35rem;
+  }
+}

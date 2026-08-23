@@ -1,0 +1,15 @@
+node_modules
+dist
+.next
+.turbo
+coverage
+playwright-report
+test-results
+pnpm-lock.yaml
+next-env.d.ts
+
+# Externally-provided baseline docs (fair-comparison reference material).
+# Kept byte-identical to the baseline commit — never reformatted.
+AGENTS.md
+README.md
+docs/tasks/FND-01.md

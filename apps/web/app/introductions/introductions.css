@@ -1,0 +1,81 @@
+.introductions-shell {
+  max-width: 44rem;
+  margin: auto;
+  padding: 2rem 1.25rem 5rem;
+}
+.introductions-shell header {
+  padding: 3rem 0 2rem;
+}
+.introductions-shell h1 {
+  font:
+    400 clamp(2.8rem, 10vw, 5rem) / 0.95 Georgia,
+    serif;
+  letter-spacing: -0.05em;
+}
+.introductions-shell h2 {
+  font:
+    400 1.7rem Georgia,
+    serif;
+  text-transform: capitalize;
+}
+.introductions-shell select {
+  display: block;
+  width: 100%;
+  border: 1px solid var(--line);
+  padding: 0.8rem;
+  background: #fffaf3;
+  margin: 0.5rem 0 1.5rem;
+}
+.introductions-shell article {
+  border-top: 1px solid var(--line);
+  padding: 1.4rem 0;
+}
+.reasons {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.mutual {
+  color: var(--teal);
+  font-weight: 700;
+}
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.introductions-shell button {
+  border: 1px solid var(--teal);
+  background: var(--teal);
+  color: #fff;
+  border-radius: 2rem;
+  padding: 0.7rem 1.2rem;
+}
+.introductions-shell button.secondary {
+  background: transparent;
+  color: var(--teal);
+}
+.introductions-shell button:disabled {
+  opacity: 0.45;
+}
+.status {
+  min-height: 1.5rem;
+  color: var(--teal);
+}
+.refresh,
+.load-more {
+  margin: 0.5rem 0 1rem;
+  min-height: 2.75rem;
+}
+@media (max-width: 42rem) {
+  .introductions-shell {
+    padding: 1rem 1rem 3rem;
+  }
+  .introductions-shell header {
+    padding: 1.5rem 0 1rem;
+  }
+  .actions button,
+  .refresh,
+  .load-more {
+    width: 100%;
+  }
+}
