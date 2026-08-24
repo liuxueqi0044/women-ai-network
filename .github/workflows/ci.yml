@@ -163,9 +163,7 @@ jobs:
       # Explicit failure policy: the build FAILS if the SBOM cannot be
       # generated from the lockfile (inventory must stay complete).
       - name: Generate SBOM (cdxgen)
-        uses: CycloneDX/cdxgen-action@5668048b6479c5ee557eec3e1766132a4661681f # v1 (pinned)
-        with:
-          output: './sbom.json'
+        run: pnpm dlx @cyclonedx/cdxgen@12.8.4 -t nodejs --no-install-deps -o sbom.json .
       - name: Upload SBOM artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4 (pinned)
         with:

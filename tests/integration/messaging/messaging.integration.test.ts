@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { createHmac } from 'node:crypto';
+import path from 'node:path';
 import pg from 'pg';
 import {
   MigrationRunner,
@@ -19,7 +20,8 @@ describe('MSG-01 PostgreSQL lifecycle and authority', () => {
       try {
         const migrationRunner = new MigrationRunner(
           pool,
-          process.env['WAI_MIGRATIONS_DIR'] ?? `${process.cwd()}\\packages\\db\\migrations`,
+          process.env['WAI_MIGRATIONS_DIR'] ??
+            path.join(process.cwd(), 'packages', 'db', 'migrations'),
           { through: '0014_messaging.sql' },
         );
         const first = await migrationRunner.up();

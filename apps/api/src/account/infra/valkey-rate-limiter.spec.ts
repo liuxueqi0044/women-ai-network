@@ -23,18 +23,18 @@ import { ValkeyRateLimiter } from './valkey-rate-limiter.js';
  */
 
 let infra: TestInfra;
-let started: StartedInfra;
+let started: StartedInfra | undefined;
 let client: Redis | null = null;
 let clock: FixedClock;
 
 beforeAll(async () => {
   started = await startTestInfra();
   infra = started.infra;
-});
+}, 120_000);
 
 afterAll(async () => {
-  await started.stop();
-});
+  await started?.stop();
+}, 120_000);
 
 beforeEach(() => {
   clock = new FixedClock(1_000_000);
