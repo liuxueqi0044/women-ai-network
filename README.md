@@ -10,7 +10,7 @@ _The image above is an approved design concept used to validate the desktop and 
 
 ## What I owned
 
-I independently defined the product constraints, designed the system architecture, decomposed the work, directed AI coding agents as an engineering execution system, reviewed the implementation, designed the verification strategy, and accepted the final delivery.
+I independently defined the product constraints, designed the system architecture, planned the implementation, reviewed the code, designed the verification strategy, and owned the final delivery.
 
 This project is evidence of end-to-end technical ownership: translating a sensitive product idea into explicit privacy invariants, data contracts, services, migrations, policy gates, test suites, and deployment operations.
 
@@ -90,7 +90,6 @@ See [`docs/runbooks/local-development.md`](docs/runbooks/local-development.md) f
 - Demo fixtures and design concepts are included; no real member data is included.
 - External identity, moderation, translation, storage, and delivery providers require separately supplied credentials.
 - A production launch still requires real infrastructure, domain, provider, security, legal, and operational review.
-- AI agents were used as implementation tools under human architecture, review, testing, and acceptance.
 
 ## Source terms
 
