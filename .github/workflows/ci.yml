@@ -158,6 +158,8 @@ jobs:
         uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3 (pinned)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: .gitleaks.toml
+          GITLEAKS_VERSION: '8.30.0'
       # Explicit failure policy: the build FAILS if the SBOM cannot be
       # generated from the lockfile (inventory must stay complete).
       - name: Generate SBOM (cdxgen)
