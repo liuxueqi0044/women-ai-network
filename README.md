@@ -1,18 +1,23 @@
 # Women AI Network
 
-A privacy-first, policy-driven community platform for cross-border discovery, consent-based connections, circles, letters, messaging, and multilingual delivery.
+Women AI Network is a privacy-first community platform for cross-border discovery, consent-based introductions, circles, letters, messaging, and multilingual delivery.
 
-> Portfolio snapshot. This repository demonstrates the product architecture and engineering implementation; it is not a claim that the service is currently operating in production.
+Its core promise is simple: discovery does not imply access. Consent and policy govern who can find, contact, connect with, or deliver content to whom—and those rules are enforced across the API, database, queues, and logs.
 
-![World discovery design concept](docs/design/FE-00/01-world-discovery-concept-v1.png)
+**Why it matters**
 
-_The image above is an approved design concept used to validate the desktop and mobile experience._
+- Sensitive interactions require explicit consent instead of optimistic UI checks.
+- Authorization and privacy rules survive background jobs and asynchronous delivery.
+- Multilingual messaging can be added without exposing private content to unrelated services.
+- Recovery tooling and redacted observability make failures diagnosable without leaking user data.
 
-## What I owned
+![World discovery product experience](docs/design/FE-00/01-world-discovery-concept-v1.png)
 
-I independently defined the product constraints, designed the system architecture, planned the implementation, reviewed the code, designed the verification strategy, and owned the final delivery.
+_Responsive desktop and mobile product experience._
 
-This project is evidence of end-to-end technical ownership: translating a sensitive product idea into explicit privacy invariants, data contracts, services, migrations, policy gates, test suites, and deployment operations.
+## End-to-end ownership
+
+I independently defined the product constraints, designed the system architecture, planned and reviewed the implementation, designed the verification strategy, and owned final delivery from a sensitive product concept to explicit privacy invariants, data contracts, services, migrations, policy gates, test suites, and deployment operations.
 
 ## System highlights
 
