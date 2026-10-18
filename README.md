@@ -96,6 +96,6 @@ See [`docs/runbooks/local-development.md`](docs/runbooks/local-development.md) f
 - External identity, moderation, translation, storage, and delivery providers require separately supplied credentials.
 - A production launch still requires real infrastructure, domain, provider, security, legal, and operational review.
 
-## Source terms
+## License
 
-The project code is shared for portfolio evaluation and technical review. It is not offered under an open-source license. Third-party packages retain their own licenses; see [`THIRD_PARTY.md`](THIRD_PARTY.md) and [`LICENSE`](LICENSE).
+The original project code is licensed under the [MIT License](LICENSE). Third-party packages retain their own licenses; see [OPEN_SOURCE.md](OPEN_SOURCE.md) and [THIRD_PARTY.md](THIRD_PARTY.md).

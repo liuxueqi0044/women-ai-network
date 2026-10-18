@@ -1,6 +1,7 @@
 {
   "name": "women-ai-network",
   "version": "0.1.0",
+  "license": "MIT",
   "private": true,
   "description": "Women-Only AI Social Network — engineering foundation monorepo (FND-01)",
   "packageManager": "pnpm@11.18.0",
